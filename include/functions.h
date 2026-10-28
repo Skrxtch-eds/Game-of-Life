@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <algorithm>
+#include <vector>
 
 /* расчитывает клетку, в которой нахоится указатель мыши и при клике инвертирует ее значение (0/1) */
 void c_point(std::vector<bool>* field, int width, int mouse_x, int mouse_y);

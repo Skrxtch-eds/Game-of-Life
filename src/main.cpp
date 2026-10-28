@@ -6,14 +6,14 @@ int main() {
     const auto screen = sf::VideoMode::getDesktopMode().size;
 
     // создание window
-    sf::RenderWindow window(sf::VideoMode({(screen.x - 100) - (screen.x - 100) % 9, (screen.y - 148) - (screen.y - 148) % 9}), "Game of Life");
+    sf::RenderWindow window(sf::VideoMode({(screen.x - 200) - (screen.x - 200) % 9, (screen.y - 300) - (screen.y - 300) % 9}), "Game of Life");
     
     // получение размера окна size.x size.y
     const auto size = window.getSize();
     // перемещение окна на центр экрана
     window.setPosition({
     (static_cast<int>(screen.x) - static_cast<int>(size.x)) / 2,
-    ((static_cast<int>(screen.y) - static_cast<int>(size.y)) / 2) - 48});
+    ((static_cast<int>(screen.y) - static_cast<int>(size.y)) / 2) - 100});
 
     // вывод размера окна
     //std::cout << size.x << " " << size.y << std::endl;
@@ -88,14 +88,15 @@ int main() {
 
         }
 
-        if (run) {
-            if (timer.getElapsedTime().asSeconds() >= 0.05f) {
+        if (run && timer.getElapsedTime().asSeconds() >= 0.05f) {
 
-                next_generation(&field_0, &field_1, width);
-                field_0 = field_1;
-                rendering_field(window, &field_0, width);
-                timer.restart();
-            }
+            next_generation(&field_0, &field_1, width);
+            field_0 = field_1;
+            timer.restart();
+        }
+
+        if (run) {
+            rendering_field(window, &field_0, width);
         } else {
             g_rendering_field(window, &field_0, width);
         }

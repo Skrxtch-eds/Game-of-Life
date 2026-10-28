@@ -1,5 +1,14 @@
 /.vscode/
 /build/
 
-*.exe
+# Результаты компиляции
 *.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.so
+*.so.*
+*.dll
+*.dylib

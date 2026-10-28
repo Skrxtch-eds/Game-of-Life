@@ -1,8 +1,8 @@
 #include "functions.h"
 
 void c_point(std::vector<bool>* field, int width, int mouse_x, int mouse_y) {
-    mouse_x = ((mouse_x) - (mouse_x % 9)) / 9;
-    mouse_y = ((mouse_y) - (mouse_y % 9)) / 9;
+    mouse_x = ((mouse_x) - (mouse_x % 11)) / 11;
+    mouse_y = ((mouse_y) - (mouse_y % 11)) / 11;
 
     // std::cout << mouse_x << " " << mouse_y << std::endl;
 
@@ -10,44 +10,44 @@ void c_point(std::vector<bool>* field, int width, int mouse_x, int mouse_y) {
 }
 
 void rendering_field(sf::RenderWindow& window, std::vector<bool>* field, int width) {
-    sf::RectangleShape square({9.f, 9.f});
+    sf::RectangleShape square({11.f, 11.f});
 
     for (int i = 0; i < field->size(); i++) {
         if ((*field)[i] == true) {
             square.setFillColor(sf::Color::White);
-            int x = (i % width) * 9;
-            int y = (i / width) * 9;
+            int x = (i % width) * 11;
+            int y = (i / width) * 11;
 
-            square.setPosition({x, y});
+            square.setPosition({static_cast<float>(x), static_cast<float>(y)});
             window.draw(square);
         } else {
             square.setFillColor(sf::Color::Black);
-            int x = (i % width) * 9;
-            int y = (i / width) * 9;
+            int x = (i % width) * 11;
+            int y = (i / width) * 11;
 
-            square.setPosition({x, y});
+            square.setPosition({static_cast<float>(x), static_cast<float>(y)});
             window.draw(square);
         }
     }
 }
 
 void g_rendering_field(sf::RenderWindow& window, std::vector<bool>* field, int width) {
-    sf::RectangleShape square({9.f, 9.f});
+    sf::RectangleShape square({11.f, 11.f});
 
     for (int i = 0; i < field->size(); i++) {
         if ((*field)[i] == true) {
             square.setFillColor(sf::Color(180, 180, 180));
-            int x = (i % width) * 9;
-            int y = (i / width) * 9;
+            int x = (i % width) * 11;
+            int y = (i / width) * 11;
 
-            square.setPosition({x, y});
+            square.setPosition({static_cast<float>(x), static_cast<float>(y)});
             window.draw(square);
         } else {
             square.setFillColor(sf::Color::Black);
-            int x = (i % width) * 9;
-            int y = (i / width) * 9;
+            int x = (i % width) * 11;
+            int y = (i / width) * 11;
 
-            square.setPosition({x, y});
+            square.setPosition({static_cast<float>(x), static_cast<float>(y)});
             window.draw(square);
         }
     }
