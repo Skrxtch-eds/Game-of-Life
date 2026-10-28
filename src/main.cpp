@@ -1,7 +1,7 @@
 #include "functions.h"
 
-int main()
-{
+int main() {
+
     //  получение размера экрана screen.x screen.y
     const auto screen = sf::VideoMode::getDesktopMode().size;
 
@@ -13,16 +13,16 @@ int main()
     // перемещение окна на центр экрана
     window.setPosition({
     (static_cast<int>(screen.x) - static_cast<int>(size.x)) / 2,
-    ((static_cast<int>(screen.y) - static_cast<int>(size.y)) / 2) - 48
-    });
+    ((static_cast<int>(screen.y) - static_cast<int>(size.y)) / 2) - 48});
+
     // вывод размера окна
     //std::cout << size.x << " " << size.y << std::endl;
 
     // задание иконки
     sf::Image icon;
 
-    if (icon.loadFromFile("assets/icon.png"))
-    {
+    if (icon.loadFromFile("assets/icon.png")) {
+
         window.setIcon(icon.getSize(), icon.getPixelsPtr());
     }
     
@@ -35,28 +35,35 @@ int main()
     std::vector<bool> field_1(height * width, 0);
 
     // выполнение команд, пока окно открыто
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
+
         //window.clear(sf::Color::Black);
 
         // проверка и выполнение в порядке очереди всех event в window 
-        while (const std::optional event = window.pollEvent())
-        {
+        while (const std::optional event = window.pollEvent()) {
+
             // закрытие программы, при нажатии на крестик
-            if (event->is<sf::Event::Closed>())
-            {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
-                break;
             }
             
             // создание квадрата при нажатии lbm
-            if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>())
-            {
+            if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>()) {
 
-                if (mouse->button == sf::Mouse::Button::Left)
-                {
+                if (mouse->button == sf::Mouse::Button::Left) {
+
                     c_point(&field_0, width, mouse->position.x, mouse->position.y);
-                    update_field(window, &field_0, width);
+                    rendering_field(window, &field_0, width);
+                }
+            }
+
+            if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+
+                if (key->code == sf::Keyboard::Key::Space) {
+
+                    next_generation(&field_0, &field_1, width);
+                    field_0 = field_1;
+                    rendering_field(window, &field_0, width);
                 }
             }
         }
