@@ -6,7 +6,7 @@ int main() {
     const auto screen = sf::VideoMode::getDesktopMode().size;
 
     // создание window
-    sf::RenderWindow window(sf::VideoMode({(screen.x - 200) - (screen.x - 200) % 9, (screen.y - 300) - (screen.y - 300) % 9}), "Game of Life");
+    sf::RenderWindow window(sf::VideoMode({(screen.x - 200) - (screen.x - 200) % 11, (screen.y - 300) - (screen.y - 300) % 11}), "Game of Life");
     
     // получение размера окна size.x size.y
     const auto size = window.getSize();
@@ -28,8 +28,8 @@ int main() {
     
     // основная программа
 
-    const int height = size.y / 9; // количество строк таблицы
-    const int width = size.x / 9; //количество столбцов таблицы
+    const int height = size.y / 11; // количество строк таблицы
+    const int width = size.x / 11; //количество столбцов таблицы
 
     std::vector<bool> field_0(height * width, 0);
     std::vector<bool> field_1(height * width, 0);
