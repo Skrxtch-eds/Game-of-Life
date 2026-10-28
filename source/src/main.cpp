@@ -1,7 +1,6 @@
 #include "functions.h"
 
-int main() {
-
+int main() {   
     //  получение размера экрана screen.x screen.y
     const auto screen = sf::VideoMode::getDesktopMode().size;
 
@@ -25,6 +24,8 @@ int main() {
 
         window.setIcon(icon.getSize(), icon.getPixelsPtr());
     }
+    
+    window.setFramerateLimit(60);
     
     // основная программа
 

@@ -1,0 +1,16 @@
+/.vscode/
+/build/
+
+# Результаты компиляции
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.so
+*.so.*
+*.dll
+*.dylib
+
+!/Game of Life.exe

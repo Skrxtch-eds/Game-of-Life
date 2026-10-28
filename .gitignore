@@ -12,3 +12,5 @@
 *.so.*
 *.dll
 *.dylib
+
+!/Game of Life.exe
