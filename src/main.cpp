@@ -15,10 +15,10 @@ int main()
     (static_cast<int>(screen.x) - static_cast<int>(size.x)) / 2,
     ((static_cast<int>(screen.y) - static_cast<int>(size.y)) / 2) - 48
     });
-    //вывод размера окна
+    // вывод размера окна
     //std::cout << size.x << " " << size.y << std::endl;
 
-    //задание иконки
+    // задание иконки
     sf::Image icon;
 
     if (icon.loadFromFile("assets/icon.png"))
@@ -26,6 +26,14 @@ int main()
         window.setIcon(icon.getSize(), icon.getPixelsPtr());
     }
     
+    // основная программа
+
+    const int height = size.y / 9; // количество строк таблицы
+    const int width = size.x / 9; //количество столбцов таблицы
+
+    std::vector<bool> field_0(height * width, 0);
+    std::vector<bool> field_1(height * width, 0);
+
     // выполнение команд, пока окно открыто
     while (window.isOpen())
     {
@@ -41,13 +49,14 @@ int main()
                 break;
             }
             
-            //создание квадрата при нажатии lbm
+            // создание квадрата при нажатии lbm
             if (const auto* mouse = event->getIf<sf::Event::MouseButtonPressed>())
             {
 
                 if (mouse->button == sf::Mouse::Button::Left)
                 {
-                    c_square(window, mouse->position.x, mouse->position.y);
+                    c_point(&field_0, width, mouse->position.x, mouse->position.y);
+                    update_field(window, &field_0, width);
                 }
             }
         }
