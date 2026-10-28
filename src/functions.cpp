@@ -31,6 +31,28 @@ void rendering_field(sf::RenderWindow& window, std::vector<bool>* field, int wid
     }
 }
 
+void g_rendering_field(sf::RenderWindow& window, std::vector<bool>* field, int width) {
+    sf::RectangleShape square({9.f, 9.f});
+
+    for (int i = 0; i < field->size(); i++) {
+        if ((*field)[i] == true) {
+            square.setFillColor(sf::Color(180, 180, 180));
+            int x = (i % width) * 9;
+            int y = (i / width) * 9;
+
+            square.setPosition({x, y});
+            window.draw(square);
+        } else {
+            square.setFillColor(sf::Color::Black);
+            int x = (i % width) * 9;
+            int y = (i / width) * 9;
+
+            square.setPosition({x, y});
+            window.draw(square);
+        }
+    }
+}
+
 void next_generation( std::vector<bool>* field_0,  std::vector<bool>* field_1, int width) {
     for (int i = 0; i < field_0->size(); i++) {
         int count = 0;

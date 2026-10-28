@@ -34,10 +34,11 @@ int main() {
     std::vector<bool> field_0(height * width, 0);
     std::vector<bool> field_1(height * width, 0);
 
+    bool run = false;
+    sf::Clock timer;
+
     // выполнение команд, пока окно открыто
     while (window.isOpen()) {
-
-        //window.clear(sf::Color::Black);
 
         // проверка и выполнение в порядке очереди всех event в window 
         while (const std::optional event = window.pollEvent()) {
@@ -53,7 +54,7 @@ int main() {
                 if (mouse->button == sf::Mouse::Button::Left) {
 
                     c_point(&field_0, width, mouse->position.x, mouse->position.y);
-                    rendering_field(window, &field_0, width);
+                    g_rendering_field(window, &field_0, width);
                 }
             }
 
@@ -63,12 +64,42 @@ int main() {
 
                     next_generation(&field_0, &field_1, width);
                     field_0 = field_1;
-                    rendering_field(window, &field_0, width);
+                    g_rendering_field(window, &field_0, width);
                 }
             }
+
+            if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+
+                if (key->code == sf::Keyboard::Key::Enter) {
+
+                    run = !run;
+                    timer.restart();
+                }
+            }
+
+            if (const auto* key = event->getIf<sf::Event::KeyPressed>()) {
+
+                if (key->code == sf::Keyboard::Key::Escape) {
+
+                    window.clear();
+                    std::fill(field_0.begin(), field_0.end(), false);
+                }
+            }
+
         }
 
-        // вывод этого экрана
+        if (run) {
+            if (timer.getElapsedTime().asSeconds() >= 0.05f) {
+
+                next_generation(&field_0, &field_1, width);
+                field_0 = field_1;
+                rendering_field(window, &field_0, width);
+                timer.restart();
+            }
+        } else {
+            g_rendering_field(window, &field_0, width);
+        }
+
         window.display();
     }
 }
